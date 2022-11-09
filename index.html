@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	   <title>SunShineMusic - Web Music Player</title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+      <link rel="shortcut icon" type="image/png" href="img/logoanisuperblackandwhite.png">
+      <link rel="stylesheet" type="text/css" href="style.css">
+	   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <script src="https://kit.fontawesome.com/ceab6117ab.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+   <img id="track_image_bg">
+
+  <div class="main">
+  	<p id="logo"><i class="fa fa-music"></i>Reggaton<!--SunShineMusic--></p>
+   <div class="show_song_no">
+     <p id="present">0</p>
+     <p>/</p>
+     <p id="total">0</p>
+   </div>
+    
+     <!--- left part --->
+     <div class="left">
+
+      <div class="txtbx">
+         <p class="title" id="titlere">title.mp3</p>
+         <p class="artist" id="artistre">Artist name</p>
+      </div>
+
+      <!--- song img --->
+      <img id="track_image">
+      <img id="track_image_under" class="track_image_under">
+      <div class="volume">
+         <i class="fa fa-volume-up" aria-hidden="true" onclick="toggle_mute()" id="volume_icon"></i>
+         <p id="volume_show">90</p>
+         <input type="range" min="0" max="100" value="90" onchange="volume_change()" id="volume">  
+      </div>
+
+     </div>
+ 
+
+    <!--- right part --->
+  	 <div class="right">
+
+        
+
+       <!--- song title & artist name --->
+      <p id="title">title.mp3</p>
+      <p id="artist">Artist name</p>
+
+      <!--- middle part --->
+  	 	<div class="middle">
+  	       <button onclick="previous_song()" id="pre"><i class="fa fa-step-backward" aria-hidden="true"></i></button>
+      	   <button onclick="justplay()" id="play"><i class="fa fa-play" aria-hidden="true"></i></button>
+  	       <button onclick="next_song()" id="next"><i class="fa fa-step-forward" aria-hidden="true"></i></button>
+  	   </div>
+      <button id="auto" onclick="autoplay_switch()">Auto play<i class="fa-regular fa-circle-play" aria-hidden="true"></i></button>
+
+       <!--- song duration part --->
+      <div class="dt">
+        <div class="time">
+         <p id="m">0</p><p style="padding-left: 0px; padding-right: 0px;">:</p><p id="s">00</p>
+         <p style="padding-left: 4px; padding-right: 4px;">/</p>
+         <p id="totalTime">0</p>
+        </div>
+        <div class="duration">
+         <input type="range" min="0" max="100" value="0" id="duration_slider" onchange="change_duration()">
+        </div>
+      </div>
+  	</div>
+   <div class="outspace"></div>
+  </div>
+  <!--- Add javascript file --->
+  <script src="script.js"></script>
+
+</body>
+</html>
