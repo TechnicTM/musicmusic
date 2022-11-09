@@ -284,8 +284,8 @@ input[type="range"]::-webkit-slider-thumb{
 	}
 	.main {
 		position: relative;
-		/*height: 700px;*/
-		height: 80%;
+		height: 700px;
+		/*height: 100%;*/
 		margin-top: 40px;
 		display: flex;
 		flex-flow: row wrap;
