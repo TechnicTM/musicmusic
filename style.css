@@ -26,8 +26,8 @@ body{
 }
 .main{
 	position: relative;
-	height: 80%;
-	width: 80%;
+	width: 1284px;
+	height: 726px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -293,6 +293,12 @@ input[type="range"] {
 .show_song_no p:nth-child(2){
 	margin: 0 5px;
 }
+@media screen and (max-width: 1600px) {
+	.main {
+		height: 80%;
+		width: 80%;
+	}
+}
 @media screen and (max-width: 1372px) {
 	.right #title {
 		font-size: 23px;
@@ -377,5 +383,15 @@ input[type="range"] {
 		height: 5px;
 		margin-top: 40px;
 		display: block;
+	}
+}
+@media screen and (max-width: 435px) {
+	.left img {
+		width: 90%;
+		height: auto;
+	}
+	.left .track_image_under {
+		width: 90%;
+		height: auto;
 	}
 }
