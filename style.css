@@ -1,3 +1,7 @@
+:root {
+    --black: #000;
+    --white: #fff;
+}
 *{
 	margin: 0;
 	padding: 0;
@@ -27,7 +31,8 @@ body{
 .main{
 	position: relative;
 	width: 1284px;
-	height: 726px;
+	/*height: 726px;*/
+	height: 684px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -96,7 +101,7 @@ input[type="range"] {
 	-webkit-appearance: none;
 	height: 10px;
 	width: 5px;
-	background: /*#494341*/ #FF8A65;
+	/*background: #494341;*/
 	box-shadow: -200px 0 0 200px #FF8A65;
 	/*border: 2px solid white;
 	border-radius: 50%;*/
@@ -107,7 +112,7 @@ input[type="range"] {
 	-webkit-appearance: none;
 	height: 10px;
 	width: 5px;
-	background: /*#494341*/ #FF8A65;
+	/*background: #494341;*/
 	box-shadow: -300px 0 0 300px #FF8A65;
 	cursor: pointer;
 	z-index: 2;
@@ -295,8 +300,12 @@ input[type="range"] {
 }
 @media screen and (max-width: 1600px) {
 	.main {
-		height: 80%;
 		width: 80%;
+	}
+}
+@media screen and (max-height: 850px) {
+	.main {
+		height: 80%;
 	}
 }
 @media screen and (max-width: 1372px) {
