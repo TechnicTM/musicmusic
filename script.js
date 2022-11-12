@@ -111,12 +111,26 @@ window.addEventListener("keydown" , (event) => {
 window.addEventListener("keydown" , (event) => {
   if (event.shiftKey && event.key === '>'){
     event.preventDefault();
-    next_song();
+    track.currentTime += 10;
   }
 });
 
 window.addEventListener("keydown" , (event) => {
   if (event.shiftKey && event.key === '<'){
+    event.preventDefault();
+    track.currentTime -= 10;
+  }
+});
+
+window.addEventListener("keydown" , (event) => {
+  if (event.ctrlKey && event.key === '.'){
+    event.preventDefault();
+    next_song();
+  }
+});
+
+window.addEventListener("keydown" , (event) => {
+  if (event.ctrlKey && event.key === ','){
     event.preventDefault();
     previous_song();
   }
@@ -331,9 +345,16 @@ function range_slider(){
        if(track.ended){
        	 play.innerHTML = '<i class="fa fa-play" aria-hidden="true"></i>';
            if(autoplay==1){
-		       index_no += 1;
-		       load_track(index_no);
-		       playsong();
+            if(index_no < All_song.length - 1) {
+              index_no += 1;
+		          load_track(index_no);
+		          playsong();
+            }
+            else {
+              index_no = 0;
+              load_track(index_no);
+		          playsong();
+            }
            }
 	    }
      }
