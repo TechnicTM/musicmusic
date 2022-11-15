@@ -190,6 +190,15 @@ function mute_sound(){
   volume_icon.classList.remove("fa-volume-up");
   volume_icon.classList.remove("fa-volume-off");
   volume_icon.classList.add("fa-volume-xmark");
+
+  if(volume.value > 50){
+    /*volume_slider.style.background = "#FF8A65";*/
+    styleVol.innerHTML = ".volume_slider::-webkit-slider-thumb { background: #FF8A65; }";
+  }
+  else{
+    /*volume_slider.style.background = "transparent";*/
+    styleVol.innerHTML = ".volume_slider::-webkit-slider-thumb { background: transparent; }";
+  }
 }
 
 //on sound function
@@ -216,6 +225,15 @@ function on_sound(){
     volume_icon.classList.remove("fa-volume-down");
     volume_icon.classList.add("fa-volume-off");
     volume_icon.classList.remove("fa-volume-up");
+  }
+
+  if(volume.value > 50){
+    /*volume_slider.style.background = "#FF8A65";*/
+    styleVol.innerHTML = ".volume_slider::-webkit-slider-thumb { background: #FF8A65; }";
+  }
+  else{
+    /*volume_slider.style.background = "transparent";*/
+    styleVol.innerHTML = ".volume_slider::-webkit-slider-thumb { background: transparent; }";
   }
 }
 
