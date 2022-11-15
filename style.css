@@ -92,9 +92,7 @@ input[type="range"] {
 	outline: none;
 	height: 3px;
 	margin: 0 15px;
-	border-radius: 50px;
-}
-input[type="range"] {
+	border-radius: 100px;
 	overflow: hidden;
 }
 .left input[type="range"]::-webkit-slider-thumb{
