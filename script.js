@@ -153,7 +153,7 @@ function load_track(index_no){
 	reset_slider();
 
 	track.src = All_song[index_no].path;
-	title.innerHTML = All_song[index_no].name;	
+	title.innerHTML = All_song[index_no].name;
 	titlere.innerHTML = All_song[index_no].name;	
 	track_image.src = All_song[index_no].img;
 	track_image_under.src = All_song[index_no].img;
@@ -166,6 +166,7 @@ function load_track(index_no){
 	timer = setInterval(range_slider ,1000);
 	total.innerHTML = All_song.length;
 	present.innerHTML = index_no + 1;
+  document.title = All_song[index_no].name + " / " + All_song[index_no].singer;
 }
 
 load_track(index_no);
