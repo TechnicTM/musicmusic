@@ -177,13 +177,13 @@ function changeLogo6() {
 function start() {
   let count;
   if (localStorage.length == 0) {
-    window.location.href = "signUpAndIn.html";
+    window.location.href = "https://technictm.github.io/musicmusicform";
   }
   else {
     for (i = 0; i<localStorage.length; i++) {
       if (localStorage.key(i) == "~username") {
         if (localStorage.getItem("~username") == "~none") {
-          window.location.href = "signUpAndIn.html";
+          window.location.href = "https://technictm.github.io/musicmusicform";
         }
         document.getElementById("usernametxt").innerHTML = "signed in as: " + localStorage.getItem('~username');
         break;
@@ -193,7 +193,7 @@ function start() {
       }
       count+=1;
       if (count == localStorage.length) {
-        window.location.href = "signUpAndIn.html";
+        window.location.href = "https://technictm.github.io/musicmusicform";
       }
     }
   }
@@ -201,7 +201,7 @@ function start() {
 
 function logout() {
   localStorage.setItem("~username", "~none");
-  window.location.href = "signUpAndIn.html";
+  window.location.href = "https://technictm.github.io/musicmusicform";
 }
 
 // close modal when click on the background \\
