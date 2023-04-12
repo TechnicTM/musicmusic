@@ -36,13 +36,12 @@
   </div>
   <img id="track_image_bg">
   <div class="main">
-  	<p id="logo"><i id="menuBtn" class="fa fa-music"></i><span id="logoTxt">Reggaton</span><!--SunShineMusic--></p>
+  	<p id="logo"><i id="menuBtn" class="fa fa-music" title="menu"></i><span id="logoTxt">Reggaton</span><!--SunShineMusic--></p>
    <div class="show_song_no">
      <p id="present">0</p>
      <p>/</p>
      <p id="total">0</p>
    </div>
-    
     <!--- left part --->
     <div class="left">
       <div class="txtbx">
@@ -53,13 +52,11 @@
       <img id="track_image">
       <img id="track_image_under" class="track_image_under">
       <div class="volume">
-         <i class="fa-solid fa-volume-up" aria-hidden="true" onclick="toggle_mute()" id="volume_icon"></i>
+         <i class="fa-solid fa-volume-up" aria-hidden="true" onclick="toggle_mute()" id="volume_icon" title="toggle mute"></i>
          <p id="volume_show">90</p>
          <input type="range" min="0" max="100" value="90" onchange="volume_change()" id="volume" class="volume_slider">
       </div>
     </div>
- 
-
     <!--- right part --->
   	<div class="right">
         <!--- song title & artist name --->
@@ -85,7 +82,6 @@
         </div>
   	</div>
     <div class="outspace"></div>
-    
     <!-- Shortcuts Modal -->
     <div class="keyboardShort" id="keyboardShort">
       <div class="keyboardShort-content">
@@ -104,7 +100,14 @@
       </div>
     </div>
   </div>
-  <!--- Add javascript file --->
+  <div class="userinfo">
+    <p class="usernametxt" id="usernametxt">name name</p>
+    <p class="logouttxt" onclick="logout()">log out <i class="fa-solid fa-arrow-right-from-bracket"></i></p>
+  </div>
+  <!--- Javascript --->
   <script src="script.js"></script>
+  <script>
+    start();
+  </script>
 </body>
 </html>

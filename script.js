@@ -174,6 +174,31 @@ function changeLogo6() {
   load_track(index_no);
 }
 
+function start() {
+  let count;
+  for (i = 0; i<localStorage.length; i++) {
+    if (localStorage.key(i) == "~username") {
+      if (localStorage.getItem("~username") == "~none") {
+        window.location.href = "signUpAndIn.html";
+      }
+      document.getElementById("usernametxt").innerHTML = "signed in as: " + localStorage.getItem('~username');
+      break;
+    }
+    else {
+      count = Number(i);
+    }
+    count+=1;
+    if (count == localStorage.length) {
+      window.location.href = "signUpAndIn.html";
+    }
+  }
+}
+
+function logout() {
+  localStorage.setItem("~username", "~none");
+  window.location.href = "signUpAndIn.html";
+}
+
 // close modal when click on the background \\
 /*window.onclick = function(event) {
   if (event.target == modal) {

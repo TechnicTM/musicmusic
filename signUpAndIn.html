@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sun Shine Music - Log In / Sign Up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+    <link rel="shortcut icon" type="image/png" href="img/icon.webp">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/ceab6117ab.js" crossorigin="anonymous"></script>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    min-height: 100vh;
+    background: rgb(0, 31, 66);
+    transition: 0.5s;
+}
+
+body.activity {
+    background: rgb(66, 0, 0);
+}
+
+:root {
+    --darkgray: rgb(37, 37, 37);
+    --brightred: #3d7ff9;
+    --white: #fff;
+    --lightred: #3da4f9;
+  }
+
+.nav-container {
+    width: 100%;
+    top: 0;
+    /*background-color: var(--darkgray);
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.1);*/
+    position: fixed;
+    z-index: 10001;
+    opacity: 1;
+}
+
+.nav-containers {
+    min-height: 10vh;
+}
+
+.undernav {
+    width: 100%;
+    min-height: 80px;
+    background: var(--brightred);
+}
+
+.navbar {
+    display: grid;
+    grid-template-columns: 0.2fr auto 1fr;
+    align-items: center;
+    height: 80px;
+    width: 90%;
+    max-width: 1720px;
+    margin: 0 auto;
+}
+
+#navbar-logo {
+    color: var(--white);
+    justify-self: start;
+    margin-left: 20px;
+    font-size: 30px;
+    font-family: 'led';
+    transition: all 0.2s ease-out;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+.textlogo {
+    width: 75px;
+    height: 70px;
+    position: absolute;
+    margin-top: -35px;
+    margin-left: 15px;
+}
+
+.nav-menu {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    list-style: none;
+    text-align: center;
+    width: 20%;
+    justify-self: end;
+    font-size: 1.0em;
+}
+
+.nav-links {
+    color: white;
+    text-decoration: none;
+    font-size: 2em;
+    transition: all 0.2s ease-out;
+}
+
+.nav-links:hover {
+    color: var(--brightred);
+}
+
+.menu-toggle .bar {
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+    background: var(--white);
+}
+
+@media screen and (max-width: 790px) {
+    .nav-container {
+        position: fixed;
+        z-index: 10000;
+    }
+
+    #navbar-logo {
+        margin-left: 20px;
+        font-size: 25px;
+    }
+
+    .nav-menu {
+        display: grid;
+        grid-template-columns: auto;
+        background: var(--darkgray);
+        margin: 0;
+        width: 100%;
+        height: 0px;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        padding: 0;
+        opacity: 1;
+        transition: all 0.5s ease;
+        z-index: 10001;
+        overflow: hidden;
+    }
+
+    .nav-menu.active {
+        background: var(--darkgray);
+        left: 0;
+        height: 150%;
+        opacity: 1;
+        transition: all 0.5 ease;
+    }
+
+    .nav-links {
+        text-align: center;
+        line-height: 60px;
+        width: 100%;
+        font-size: 1.5em;
+        display: table;
+    }
+
+    .nav-links:hover {
+        background-color: var(--brightred);
+        color: var(--white);
+        transition: all 0.4s ease-out;
+    }
+    
+    .navbar {
+        width: 100%;
+    }
+
+    #mobile-menu {
+        position: absolute;
+        top: 20%;
+        right: 5%;
+        transform: translate(5%, 20%);
+    }
+
+    .menu-toggle .bar {
+        display: block;
+        cursor: pointer;
+        border-radius: 50px;
+    }
+
+    .menu-toggle:hover {
+        cursor: pointer;
+    }
+
+    #mobile-menu.is-active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    #mobile-menu.is-active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    #mobile-menu.is-active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+}
+
+.continer {
+    position: relative;
+    width: 800px;
+    height: 500px;
+    margin: 20px;
+}
+
+#usernametab {
+    color: #fff;
+    font-size: 1em;
+    margin-left: 5px;
+}
+
+.userout {
+    color: #fff;
+    font-size: 1em;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: none;
+}
+
+.userout.show {
+    display: flex;
+}
+
+.blueBg {
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    height: 420px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 5px 45px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+}
+
+.blueBg .box {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.blueBg .box h2 {
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.blueBg .box button {
+    cursor: pointer;
+    padding: 10px 20px;
+    background: /*#03a9f4*/ #202020;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+}
+
+.formBx {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: #fff;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 45px rgba(0, 0, 0, 0.25);
+    transition: 0.5s ease-in-out;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.formBx.activity {
+    left: 50%;
+}
+
+.formBx .form {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    padding: 50px;
+    transition: 0.5s;
+}
+
+.formBx .signinForm {
+    transition-delay: 0.5s;
+}
+
+.formBx.activity .signinForm {
+    left: -100%;
+    transition-delay: 0s;
+}
+
+.formBx .signupForm {
+    left: 100%;
+    transition-delay: 0s;
+}
+
+.formBx.activity .signupForm {
+    left: 0;
+    transition-delay: 0.5s;
+}
+
+.formBx .form form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.formBx .form form h3 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.formBx .form form input {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px;
+    outline: none;
+    font-size: 16px;
+    border: 1px solid #333;
+    border-radius: 5px;
+}
+
+.formBx .form form input[type="checkbox"] {
+    max-width: 15px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.passDiv {
+    position: relative;
+    width: 100%;
+    height: 60px;
+}
+
+#eyeIconIn,
+#eyeIconUp {
+    position: absolute;
+    height: auto;
+    top: 34%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: 20px;
+    background-size: cover;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.chider {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 5px;
+    height: 10px;
+    border-radius: 10px;
+}
+
+.formBx .form form input[type="button"] {
+    background: /*#03a9f4*/ #202020;
+    border: none;
+    color: #fff;
+    max-width: 100px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.formBx .form form .forgot {
+    color: #333;
+    cursor: pointer;
+    width: 141px;
+}
+
+.formBx .form form .forgot:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 991px) {
+    .continer {
+        max-width: 400px;
+        height: 650px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .continer .blueBg {
+        top: 0;
+        height: 100%;
+    }
+
+    .formBx {
+        width: 100%;
+        height: 500px;
+        top: 0;
+        box-shadow: none;
+    }
+
+    .blueBg .box {
+        position: absolute;
+        width: 100%;
+        height: 150px;
+        bottom: 0;
+    }
+
+    .box.signin {
+        top: 0;
+    }
+
+    .formBx.activity {
+        left: 0;
+        top: 150px;
+    }
+}
+    </style>
+  </head>
+  <body>
+    <div class="continer">
+        <div class="blueBg">
+            <div class="box signin">
+                <h2>Alredy Have an Account ?</h2>
+                <button class="signinBtn">Sign in</button>
+            </div>
+            <div class="box signup">
+                <h2>Don't Have an Account ?</h2>
+                <button class="signupBtn">Sign up</button>
+            </div>
+        </div>
+        <div class="formBx">
+            <div class="form signinForm">
+                <form>
+                    <h3>Sign In</h3>
+                    <input id="emailin" type="email" placeholder="Email Address" required>
+                    <div class="passDiv">
+                        <input id="passin" type="password" placeholder="Password" required>
+                        <i id="eyeIconIn" class="fa-regular fa-eye" onclick="passVisIn()"></i>
+                    </div>
+                    <!--<div class="row">
+                        <input type="checkbox" id="chb">
+                        <p for="chb" class="RememberMe">Remember Me</p>
+                    </div>-->
+                    <input type="button" value="Login" id="signin">
+                    <a class="forgot" id="forgotBtn">Forgot Password</a>
+                </form>
+            </div>
+            <div class="form signupForm">
+                <form>
+                    <h3>Sign Up</h3>
+                    <!--<input id="username" type="text" placeholder="Username" required>-->
+                    <input id="usernameup" type="text" placeholder="User Name" required>
+                    <input id="emailup" type="email" placeholder="Email Address" required>
+                    <div class="passDiv">
+                        <input id="passup" type="password" placeholder="Password" required>
+                        <i id="eyeIconUp" class="fa-regular fa-eye" onclick="passVisUp()"></i>
+                    </div>
+                    <!--<input id="conpassup" type="password" placeholder="Confirm password" required>-->
+                    <div class="chider" onclick="cls()"></div>
+                    <input type="button" value="Register" id="signup">
+                    <a class="forgot" id="removeBtn">Remove Account</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+    // ---- transition bitwin sign in / up ---- \\
+    const signinBtn = document.querySelector('.signinBtn');
+    const signupBtn = document.querySelector('.signupBtn');
+    const formBx = document.querySelector('.formBx');
+    const body = document.querySelector('body');
+    signupBtn.onclick = function(){
+      formBx.classList.add('activity');
+      body.classList.add('activity');
+    }
+    
+    signinBtn.onclick = function(){
+      formBx.classList.remove('activity');
+      body.classList.remove('activity');
+    }
+
+    // ---- workin sign in / up ---- \\
+    const signUpButton = document.querySelector('#signup');
+    const signInButton = document.querySelector('#signin');
+    const forgotBtn = document.querySelector('#forgotBtn');
+    const removeBtn = document.querySelector('#removeBtn');
+    
+    function cls() {
+      localStorage.clear();
+      alert("clear has been secsesful!");
+      location.reload();
+    }
+    
+    function validateEmail(email) {
+      const textOrder = /\S+@\S+\.\S+/;
+      return textOrder.test(email);
+    }
+
+    localStorage.setItem("~username", "~none");
+
+    const signUp = () => {
+        const username = document.querySelector('#usernameup').value;
+        const email = document.querySelector('#emailup').value;
+        const password = document.querySelector('#passup').value;
+        const isValid = validateEmail(email);
+        if (username == "" || email == "" || password == "") {
+            alert("All input boxes should have content!");
+        }
+        else if (!isValid) {
+          event.preventDefault();
+          alert('Invalid email address!');
+        }
+        else if (email.includes(' ') || password.includes(' ')) {
+            alert("You can't use the space character when you enter an email or password!");
+        }
+        else if (username.includes('~') || email.includes('~') || password.includes('~')) {
+          alert("You can't use the '~' character when you enter information in the input boxes!");
+        }
+        else {
+          const info = password + "~" + username;
+          let count;
+          if (localStorage.length == 0) {
+            localStorage.setItem(email, info);
+            alert(`${email} has been registered!\n(* You will need your Username to change your password *)`);
+            localStorage.setItem("~username", username);
+            /*document.querySelector('#usernameup').value = "";
+            document.querySelector('#emailup').value = "";
+            document.querySelector('#passup').value = "";*/
+            window.location.href = "index.html";
+          }
+          else {
+            for (i = 0; i<localStorage.length; i++) {
+              let x = localStorage.key(i);
+              if (x == email) {
+                alert(`${email} is already registered!`);
+                break;
+              }
+              count = Number(i);
+            }
+            count+=1;
+            if (count == localStorage.length) {
+              localStorage.setItem(email, info);
+              alert(`${email} has been registered!\n(* You will need your Username to change your password *)`);
+              localStorage.setItem("~username", username);
+              /*document.querySelector('#usernameup').value = "";
+              document.querySelector('#emailup').value = "";
+              document.querySelector('#passup').value = "";*/
+              window.location.href = "index.html";
+            }
+          }
+        }
+    }
+    const signIn = () => {
+      const email = document.querySelector('#emailin').value;
+      const password = document.querySelector('#passin').value;
+      if (localStorage.length == 0) {
+          alert("You have to register before you login!");
+          document.querySelector('#emailin').value = "";
+          document.querySelector('#passin').value = "";
+      }
+      else {
+          const inputString = localStorage.getItem(email);
+          let count;
+          for (i = 0; i<localStorage.length; i++) {
+              let x = localStorage.key(i);
+              if (x == email) {
+                  const commaIndex = inputString.indexOf('~');
+                  const getPassword = inputString.substring(0, commaIndex);
+                  const getUsername = inputString.substring(commaIndex + 1);
+                  // console.log(getPassword);
+                  // console.log(getUsername);
+                  if (getPassword === password) {
+                      alert(`Welcome back, ${getUsername}!`);
+                      localStorage.setItem("~username", getUsername);
+                      /*document.querySelector('#emailin').value = "";
+                      document.querySelector('#passin').value = "";*/
+                      window.location.href = "index.html";
+                    }
+                    else {
+                        alert('Incorrect password!');
+                    }
+                    break;
+                }
+                count = Number(i);
+            }
+            count+=1;
+            if (count == localStorage.length) {
+                alert('Incorrect email!');
+            }
+        }
+    }
+    
+    const forgot = () => {
+        if (localStorage.length == 0) {
+            alert("You have to register before you using this function!");
+        }
+        else {
+            let email = prompt("What is your Email?");
+            let count;
+            for (i = 0; i<localStorage.length; i++) {
+                let x = localStorage.key(i);
+                if (email == null) {
+                    break;
+                }
+                if (email == "%?%?%?%?" || email == "?%?%?%?%") {
+                    alert((i+1) + ": " + x);
+                }
+                if (x == email) {
+                    const inputString = localStorage.getItem(email);
+                    const commaIndex = inputString.indexOf('~');
+                    const getUsername = inputString.substring(commaIndex + 1);
+                    let y = prompt("What is the Username of '" + email + "' ?");
+                    if (y == null) {
+                        break;
+                    }
+                    if (y != getUsername) {
+                        alert("Incorrect username!");
+                        break;
+                    }
+                    if (y == getUsername) {
+                        let pass = prompt("Enter a new password:");
+                        if (pass == null) {
+                            break;
+                        }
+                        while (pass == "" || pass.includes(' ') || pass.includes('~')) {
+                            alert("You must enter an appropriate password!");
+                            pass = prompt("Enter a new password:");
+                        }
+                        const info = pass + "~" + getUsername;
+                        localStorage.setItem(email, info);
+                        alert(email + ", new password is: " + pass);
+                        break;
+                    }
+                }
+                count = Number(i);
+            }
+            count+=1;
+            if (count == localStorage.length) {
+                alert("Incorrect email!");
+            }
+        }
+    }
+    
+    function passVisIn() {
+        const x = document.getElementById('passin');
+        if (x.type === "password") {
+            x.type = "text";
+            document.getElementById('eyeIconIn').classList.remove('fa-eye');
+            document.getElementById('eyeIconIn').classList.add('fa-eye-slash');
+        }
+        else {
+            x.type = "password";
+            document.getElementById('eyeIconIn').classList.add('fa-eye');
+            document.getElementById('eyeIconIn').classList.remove('fa-eye-slash');
+        }
+    }
+    function passVisUp() {
+        const y = document.getElementById('passup');
+        if (y.type === "password") {
+            y.type = "text";
+            document.getElementById('eyeIconUp').classList.remove('fa-eye');
+            document.getElementById('eyeIconUp').classList.add('fa-eye-slash');
+        }
+        else {
+            y.type = "password";
+            document.getElementById('eyeIconUp').classList.add('fa-eye');
+            document.getElementById('eyeIconUp').classList.remove('fa-eye-slash');
+        }
+    }
+    
+    const removeAc = () => {
+        if (localStorage.length == 0) {
+            alert("You have to register before you using this function!");
+        }
+        else {
+            let email = prompt("What is your Email?");
+            let count;
+            for (i = 0; i<localStorage.length; i++) {
+                let x = localStorage.key(i);
+                if (email == null) {
+                    break;
+                }
+                if (email == "%?%?%?%?" || email == "?%?%?%?%") {
+                    alert((i+1) + ": " + x);
+                }
+                if (x == email) {
+                    let pass = prompt("Enter the password:");
+                    if (pass == null) {
+                        break;
+                    }
+                    while (pass == "" || pass.includes(' ') || pass.includes('~')) {
+                        alert("You must enter an appropriate password!");
+                        pass = prompt("Enter the password:");
+                    }
+                    const inputString = localStorage.getItem(email);
+                    const commaIndex = inputString.indexOf('~');
+                    const getPassword = inputString.substring(0, commaIndex);
+                    if (confirm(`Are you sure you want to delete this account (${email}) from this website?`)) {
+                        localStorage.removeItem(email);
+                        alert("The account has been deleted");
+                    } else {
+                        alert("Ok, The account will not be deleted");
+                    }
+                    break;
+                }
+                count = Number(i);
+            }
+            count+=1;
+            if (count == localStorage.length) {
+          alert("Incorrect email!");
+        }
+      }
+    }
+
+    signUpButton.addEventListener('click', signUp);
+    signInButton.addEventListener('click', signIn);
+    forgotBtn.addEventListener('click', forgot);
+    removeBtn.addEventListener('click', removeAc);
+    </script>
+  </body>
+</html>
