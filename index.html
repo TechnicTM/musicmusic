@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	   <title>SunShineMusic - Web Music Player</title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+      <link rel="shortcut icon" type="image/png" href="img/icon.webp">
+      <link rel="stylesheet" type="text/css" href="style.css">
+	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <script src="https://kit.fontawesome.com/ceab6117ab.js" crossorigin="anonymous"></script>
+      <style data="vol" type="text/css"></style>
+      <style data="dir" type="text/css"></style>
+</head>
+<body>
+  <div id="sideNav" class="sideNav">
+    <div class="closeBtn" id="closeMenuBtn"><i class="fa-solid fa-xmark"></i></div>
+    <a onclick="changeLogo1()" class="navLink" id="navLink">Reggaton</a>
+    <a onclick="changeLogo2()" class="navLink" id="navLink">R&B</a>
+    <a onclick="changeLogo3()" class="navLink" id="navLink">Electronic/Dance</a>
+    <a onclick="changeLogo4()" class="navLink" id="navLink">Pop</a>
+    <a onclick="changeLogo5()" class="navLink" id="navLink">Afrobeats</a>
+    <a onclick="changeLogo6()" class="navLink" id="navLink">Hip-Hop/Rap</a>
+  </div>
+  <div class="sideNavBg" id="sideNavBg" onclick="closeBg()"></div>
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <h2 class="genreTitle">Choose A Genre:</h2><br>
+      <a onclick="changeLogo1()" class="genreLink" id="navLink">Reggaton</a><br><br>
+      <a onclick="changeLogo2()" class="genreLink" id="navLink">R&B</a><br><br>
+      <a onclick="changeLogo3()" class="genreLink" id="navLink">Electronic/Dance</a><br><br>
+      <a onclick="changeLogo4()" class="genreLink" id="navLink">Pop</a><br><br>
+      <a onclick="changeLogo5()" class="genreLink" id="navLink">Afrobeats</a><br><br>
+      <a onclick="changeLogo6()" class="genreLink" id="navLink">Hip-Hop/Rap</a><br><br>
+      <br><p class="genreTxt">If you want to change the genre of the playlist, click on the music icon ( <i class="fa fa-music" style="display: inline-block;"></i> ) and choose the genre you would like!</p>
+    </div>
+  </div>
+  <img id="track_image_bg">
+  <div class="main">
+  	<p id="logo"><i id="menuBtn" class="fa fa-music" title="menu"></i><span id="logoTxt">Reggaton</span><!--SunShineMusic--></p>
+   <div class="show_song_no">
+     <p id="present">0</p>
+     <p>/</p>
+     <p id="total">0</p>
+   </div>
+    <!--- left part --->
+    <div class="left">
+      <div class="txtbx">
+         <p class="title" id="titlere">title.mp3</p>
+         <p class="artist" id="artistre">Artist name</p>
+      </div>
+      <!--- song img --->
+      <img id="track_image">
+      <img id="track_image_under" class="track_image_under">
+      <div class="volume">
+         <i class="fa-solid fa-volume-up" aria-hidden="true" onclick="toggle_mute()" id="volume_icon" title="toggle mute"></i>
+         <p id="volume_show">90</p>
+         <input type="range" min="0" max="100" value="90" onchange="volume_change()" id="volume" class="volume_slider">
+      </div>
+    </div>
+    <!--- right part --->
+  	<div class="right">
+        <!--- song title & artist name --->
+        <p id="title">title.mp3</p>
+        <p id="artist">Artist name</p>
+        <!--- middle part --->
+  	 	  <div class="middle">
+  	       <button onclick="previous_song()" onmouseover="previousTitleShow(this)" id="pre"><i class="fa fa-step-backward" aria-hidden="true"></i></button>
+      	   <button onclick="justplay()" onmouseover="playPauseTitle(this)" id="play"><i class="fa fa-play" aria-hidden="true"></i></button>
+  	       <button onclick="next_song()" onmouseover="nextTitleShow(this)" id="next"><i class="fa fa-step-forward" aria-hidden="true"></i></button>
+  	    </div>
+        <button id="auto" onclick="autoplay_switch()">Auto play<i class="fa-regular fa-circle-play" aria-hidden="true"><!--fa-spin--></i></button>
+        <!--- song duration part --->
+        <div class="dt">
+          <div class="time">
+            <p id="m">0</p><p style="padding-left: 0px; padding-right: 0px;">:</p><p id="s">00</p>
+            <p style="padding-left: 4px; padding-right: 4px;">/</p>
+            <p id="totalTime">0</p>
+          </div>
+          <div class="duration">
+            <input type="range" min="0" max="100" value="0" id="duration_slider" onchange="change_duration()" class="diraction_slider">
+          </div>
+        </div>
+  	</div>
+    <div class="outspace"></div>
+    <!-- Shortcuts Modal -->
+    <div class="keyboardShort" id="keyboardShort">
+      <div class="keyboardShort-content">
+        <h2 class="keyboardShortTitle">Keyboard Shortcuts:</h2><br>
+        <div class="keyboardShortCloseBtn" onclick="clsKeyShort()"><i class="fa-solid fa-xmark shortcut-xmark"></i></div>
+        <br><hr class="shortcutHr"><br><p class="keyboardShortTxt shortLeft">Toggle play/pause:</p><p class="keyboardShortTxt  shortRight">k / space bar</p><br><br><hr class="shortcutHr"><br>
+        <p class="keyboardShortTxt shortLeft">Toggle mute:</p><p class="keyboardShortTxt  shortRight">m</p><br><br><hr class="shortcutHr"><br>
+        <p class="keyboardShortTxt shortLeft">Toggle menu:</p><p class="keyboardShortTxt  shortRight">M (Shift + m)</p><br><br><hr class="shortcutHr"><br>
+        <p class="keyboardShortTxt shortLeft">Toggle autoplay:</p><p class="keyboardShortTxt  shortRight">a</p><br><br><hr class="shortcutHr"><br>
+        <p class="keyboardShortTxt shortLeft">Volume Up (+5):</p><p class="keyboardShortTxt  shortRight">=</p><br><br><hr class="shortcutHr"><br>
+        <p class="keyboardShortTxt shortLeft">Volume Down (-5):</p><p class="keyboardShortTxt  shortRight">-</p><br><br><hr class="shortcutHr"><br>
+        <p class="keyboardShortTxt shortLeft">Forward 10 seconds:</p><p class="keyboardShortTxt  shortRight">l</p><br><br><hr class="shortcutHr"><br>
+        <p class="keyboardShortTxt shortLeft">Rewind 10 seconds:</p><p class="keyboardShortTxt  shortRight">j</p><br><br><hr class="shortcutHr"><br>
+        <p class="keyboardShortTxt shortLeft">Next song:</p><p class="keyboardShortTxt  shortRight">n</p><br><br><hr class="shortcutHr"><br>
+        <p class="keyboardShortTxt shortLeft">Previous song:</p><p class="keyboardShortTxt  shortRight">p</p><br><br><hr class="shortcutHr"><br>
+      </div>
+    </div>
+  </div>
+  <div class="userinfo">
+    <p class="usernametxt" id="usernametxt">signed in as:</p>
+    <p class="logouttxt" onclick="logout()">log out <i class="fa-solid fa-arrow-right-from-bracket"></i></p>
+  </div>
+  <!--- Javascript --->
+  <script src="script.js"></script>
+  <script>
+    start();
+  </script>
+</body>
+</html>
