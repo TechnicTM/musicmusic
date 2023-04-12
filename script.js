@@ -176,20 +176,25 @@ function changeLogo6() {
 
 function start() {
   let count;
-  for (i = 0; i<localStorage.length; i++) {
-    if (localStorage.key(i) == "~username") {
-      if (localStorage.getItem("~username") == "~none") {
+  if (localStorage.length == 0) {
+    window.location.href = "signUpAndIn.html";
+  }
+  else {
+    for (i = 0; i<localStorage.length; i++) {
+      if (localStorage.key(i) == "~username") {
+        if (localStorage.getItem("~username") == "~none") {
+          window.location.href = "signUpAndIn.html";
+        }
+        document.getElementById("usernametxt").innerHTML = "signed in as: " + localStorage.getItem('~username');
+        break;
+      }
+      else {
+        count = Number(i);
+      }
+      count+=1;
+      if (count == localStorage.length) {
         window.location.href = "signUpAndIn.html";
       }
-      document.getElementById("usernametxt").innerHTML = "signed in as: " + localStorage.getItem('~username');
-      break;
-    }
-    else {
-      count = Number(i);
-    }
-    count+=1;
-    if (count == localStorage.length) {
-      window.location.href = "signUpAndIn.html";
     }
   }
 }
