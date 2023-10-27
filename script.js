@@ -249,7 +249,7 @@ function clsProPic() {
 
 function logout() {
   localStorage.setItem("~username", "~none");
-  window.location.href = "signUpAndIn.html";
+  window.location.href = "https://technictm.github.io/musicmusicform/";
 }
 
 // close modal when click on the background \\
