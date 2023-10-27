@@ -182,13 +182,13 @@ function changeUsername() {
 function start() {
   let count;
   if (localStorage.length == 0) {
-    window.location.href = "signUpAndIn.html";
+    window.location.href = "https://technictm.github.io/musicmusicform/";
   }
   else {
     for (i = 0; i<localStorage.length; i++) {
       if (localStorage.key(i) == "~username") {
         if (localStorage.getItem("~username") == "~none") {
-          window.location.href = "signUpAndIn.html";
+          window.location.href = "https://technictm.github.io/musicmusicform/";
         }
         // document.getElementById("usernametxt").innerHTML = "signed in as: " + localStorage.getItem('~username');
         const inputString = localStorage.getItem('~username');
@@ -206,7 +206,7 @@ function start() {
       }
       count+=1;
       if (count == localStorage.length) {
-        window.location.href = "signUpAndIn.html";
+        window.location.href = "https://technictm.github.io/musicmusicform/";
       }
     }
   }
