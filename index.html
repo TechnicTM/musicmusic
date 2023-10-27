@@ -12,6 +12,22 @@
       <style data="dir" type="text/css"></style>
 </head>
 <body>
+  <div class="profile-containner">
+    <div class="profile" onclick="profileToggle();">
+        <img src="img/avatar0.png" alt="profile picture" class="profile-image">
+    </div>
+    <div class="profile-menu">
+        <h3 class="profile-title" id="profile-title"><br><span></span></h3>
+        <ul class="profile-menu-box">
+            <hr class="shortcutHr">
+            <li onclick="clsProPic()"><i class="fa-solid fa-circle-user"></i> Change Profile Picture</li>
+            <hr class="shortcutHr">
+            <li onclick="changeUsername()"><i class="fa-solid fa-user"></i> Change Username</li>
+            <hr class="shortcutHr">
+            <li class="profile-out" onclick="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out</li>
+        </ul>
+    </div>
+  </div>
   <div id="sideNav" class="sideNav">
     <div class="closeBtn" id="closeMenuBtn"><i class="fa-solid fa-xmark"></i></div>
     <a onclick="changeLogo1()" class="navLink" id="navLink">Reggaton</a>
@@ -53,8 +69,8 @@
       <img id="track_image_under" class="track_image_under">
       <div class="volume">
          <i class="fa-solid fa-volume-up" aria-hidden="true" onclick="toggle_mute()" id="volume_icon" title="toggle mute"></i>
-         <p id="volume_show">90</p>
          <input type="range" min="0" max="100" value="90" onchange="volume_change()" id="volume" class="volume_slider">
+         <p id="volume_show">90</p>
       </div>
     </div>
     <!--- right part --->
@@ -68,7 +84,13 @@
       	   <button onclick="justplay()" onmouseover="playPauseTitle(this)" id="play"><i class="fa fa-play" aria-hidden="true"></i></button>
   	       <button onclick="next_song()" onmouseover="nextTitleShow(this)" id="next"><i class="fa fa-step-forward" aria-hidden="true"></i></button>
   	    </div>
-        <button id="auto" onclick="autoplay_switch()">Auto play<i class="fa-regular fa-circle-play" aria-hidden="true"><!--fa-spin--></i></button>
+        <button id="auto" onclick="autoplay_switch()">Auto play<i class="fa-regular fa-circle-play sicon" aria-hidden="true"><!--fa-spin--></i></button>
+        <div class="karaokeContainner">
+          <button class="karaokeBtn" id="karaokeLyrics" onclick="lyrics_toggle()" title="Lyrics"><i class="fa-solid fa-closed-captioning sicon"></i></button>
+          <div class="karaokeLine"></div>
+          <button id="karaokeOnOff" style="display: none;"><i class="fa-solid fa-microphone sicon"></i></button>
+          <button class="karaokeBtn" id="karaokeOnOff" onclick="karaoke_toggle()" title="Toggle Karaoke"><i class="fa-solid fa-microphone sicon"></i></button>
+        </div>
         <!--- song duration part --->
         <div class="dt">
           <div class="time">
@@ -99,11 +121,23 @@
         <p class="keyboardShortTxt shortLeft">Previous song:</p><p class="keyboardShortTxt  shortRight">p</p><br><br><hr class="shortcutHr"><br>
       </div>
     </div>
+    <div class="profilePicCont" id="profilePicCont">
+      <div class="profilePic-content">
+        <div class="profilePicCloseBtn" onclick="clsProPic()"><i class="fa-solid fa-xmark shortcut-xmark"></i></div>
+        <img class="profilePicImage" onclick="proPicCeck(0)" src="img/avatar0.png" alt="">
+        <img class="profilePicImage" onclick="proPicCeck(1)" src="img/avatar1.png" alt="">
+        <img class="profilePicImage" onclick="proPicCeck(2)" src="img/avatar2.png" alt="">
+        <img class="profilePicImage" onclick="proPicCeck(3)" src="img/avatar3.png" alt="">
+        <img class="profilePicImage" onclick="proPicCeck(4)" src="img/avatar4.png" alt="">
+        <img class="profilePicImage" onclick="proPicCeck(5)" src="img/avatar5.png" alt="">
+      </div>
+    </div>
+    <div class="bottomspace"></div>
   </div>
-  <div class="userinfo">
+  <!--<div class="userinfo">
     <p class="usernametxt" id="usernametxt">signed in as:</p>
     <p class="logouttxt" onclick="logout()">log out <i class="fa-solid fa-arrow-right-from-bracket"></i></p>
-  </div>
+  </div>-->
   <!--- Javascript --->
   <script src="script.js"></script>
   <script>

@@ -25,6 +25,8 @@ let styleVol = document.querySelector('[data="vol"]');
 let styleDir = document.querySelector('[data="dir"]');
 let modal = document.getElementById("myModal");
 let keyshort = document.getElementById("keyboardShort");
+let proPicCont = document.getElementById("profilePicCont");
+let proPic = document.querySelector('.profile-image');
 
 let update_volume = 90;
 let timer;
@@ -33,11 +35,17 @@ let ieoc = false;
 let autoplay = 0;
 let toggleMute = 1;
 let toggleMenu = 0;
+let toggleKaraoke = 0;
 let showK = 0;
+let showP = 0;
 
 let pl = 0;
 let index_no = 0;
 let Playing_song = false;
+
+// document.addEventListener("contextmenu", (event) => {
+//  event.preventDefault();
+// });
 
 //responsive side menu bar
 const menuBtn = document.getElementById('menuBtn');
@@ -72,120 +80,125 @@ function closeBg() {
   }, 500);
 }
 function changeLogo1() {
-  logo.innerHTML = "Reggaton";
-  sideNav.classList.remove('show');
-  sideNavBg.classList.remove('show');
-  for (let i = 0; i<nlc.length; i++) {
-    nlc[i].classList.remove('active');
-  }
+  resetAll();
   nlc[0].classList.add('active');
-  setTimeout(function () {
-    sideNav.style.display = "none";
-    sideNavBg.style.display = "none";
-    modal.style.display = "none";
-  }, 500);
+  logo.innerHTML = "Reggaton";
   pl = 0;
   index_no = 0;
   load_track(index_no);
 }
 function changeLogo2() {
-  sideNav.classList.remove('show');
-  sideNavBg.classList.remove('show');
-  for (let i = 0; i<nlc.length; i++) {
-    nlc[i].classList.remove('active');
-  }
+  resetAll();
   nlc[1].classList.add('active');
-  setTimeout(function () {
-    sideNav.style.display = "none";
-    sideNavBg.style.display = "none";
-    modal.style.display = "none";
-  }, 500);
   logo.innerHTML = "R&B";
   pl = 1;
   index_no = 0;
   load_track(index_no);
 }
 function changeLogo3() {
-  sideNav.classList.remove('show');
-  sideNavBg.classList.remove('show');
-  for (let i = 0; i<nlc.length; i++) {
-    nlc[i].classList.remove('active');
-  }
+  resetAll();
   nlc[2].classList.add('active');
-  setTimeout(function () {
-    sideNav.style.display = "none";
-    sideNavBg.style.display = "none";
-    modal.style.display = "none";
-  }, 500);
   logo.innerHTML = "Electronic/Dance";
   pl = 2;
   index_no = 0;
   load_track(index_no);
 }
 function changeLogo4() {
-  sideNav.classList.remove('show');
-  sideNavBg.classList.remove('show');
-  for (let i = 0; i<nlc.length; i++) {
-    nlc[i].classList.remove('active');
-  }
+  resetAll();
   nlc[3].classList.add('active');
-  setTimeout(function () {
-    sideNav.style.display = "none";
-    sideNavBg.style.display = "none";
-    modal.style.display = "none";
-  }, 500);
-  logo.innerHTML = "Hip Hop";
+  logo.innerHTML = "Pop";
   pl = 3;
   index_no = 0;
   load_track(index_no);
 }
 function changeLogo5() {
-  sideNav.classList.remove('show');
-  sideNavBg.classList.remove('show');
-  for (let i = 0; i<nlc.length; i++) {
-    nlc[i].classList.remove('active');
-  }
+  resetAll();
   nlc[4].classList.add('active');
-  setTimeout(function () {
-    sideNav.style.display = "none";
-    sideNavBg.style.display = "none";
-    modal.style.display = "none";
-  }, 500);
   logo.innerHTML = "Afrobeats";
   pl = 4;
   index_no = 0;
   load_track(index_no);
 }
 function changeLogo6() {
-  sideNav.classList.remove('show');
-  sideNavBg.classList.remove('show');
-  for (let i = 0; i<nlc.length; i++) {
-    nlc[i].classList.remove('active');
-  }
+  resetAll();
   nlc[5].classList.add('active');
-  setTimeout(function () {
-    sideNav.style.display = "none";
-    sideNavBg.style.display = "none";
-    modal.style.display = "none";
-  }, 500);
   logo.innerHTML = "Hip-Hop/Rap";
   pl = 5;
   index_no = 0;
   load_track(index_no);
 }
 
+function resetAll() {
+  for (let i = 0; i<nlc.length; i++) {
+    nlc[i].classList.remove('active');
+  }
+  sideNav.classList.remove('show');
+  sideNavBg.classList.remove('show');
+  setTimeout(function () {
+    sideNav.style.display = "none";
+    sideNavBg.style.display = "none";
+    modal.style.display = "none";
+  }, 500);
+  toggleKaraoke = 0;
+  pausesong();
+	reset_slider();
+  track.src = All_song[pl][index_no].path;
+  track.load();
+  document.getElementById('karaokeOnOff').innerHTML = '<i class="fa-solid fa-microphone"></i>';
+  let time = Math.floor(track.currentTime);
+  let minutes = Math.floor(time/60);
+  let secends = time%60;
+  secends = secends < 10 ? '0' + secends : secends;
+  m.innerHTML = minutes;
+  s.innerHTML = secends;
+}
+
+function changeUsername() {
+  const inputString = localStorage.getItem('~username');
+  const commaIndex = inputString.indexOf('~');
+  const commaIndexT = inputString.indexOf('|');
+  const getEmail = inputString.substring(0, commaIndex);
+  const getProPic = inputString.substring(commaIndexT + 1);
+  const inputString1 = localStorage.getItem(getEmail);
+  const commaIndex1 = inputString1.indexOf('~');
+  const getPassword = inputString1.substring(0, commaIndex1);
+  let username = prompt("Enter new username:");
+  if (username != null) {
+    while (username.includes('|') || username.includes('~') || username == "") {
+      alert("You must enter a valid username! (You can't use the '|' symbol or the '~' symbols in a username)");
+      username = prompt("Enter new username:");
+      if (username == null) {
+        break;
+      }
+    }
+  }
+  if (username != null) {
+    localStorage.setItem(getEmail, getPassword + "~" + username + "|" + getProPic);
+    localStorage.setItem("~username", getEmail + "~" + username + "|" + getProPic);
+    start();
+  }
+}
+
 function start() {
   let count;
   if (localStorage.length == 0) {
-    window.location.href = "https://technictm.github.io/musicmusicform";
+    window.location.href = "signUpAndIn.html";
   }
   else {
     for (i = 0; i<localStorage.length; i++) {
       if (localStorage.key(i) == "~username") {
         if (localStorage.getItem("~username") == "~none") {
-          window.location.href = "https://technictm.github.io/musicmusicform";
+          window.location.href = "signUpAndIn.html";
         }
-        document.getElementById("usernametxt").innerHTML = "signed in as: " + localStorage.getItem('~username');
+        // document.getElementById("usernametxt").innerHTML = "signed in as: " + localStorage.getItem('~username');
+        const inputString = localStorage.getItem('~username');
+        const commaIndex = inputString.indexOf('~');
+        const commaIndexT = inputString.indexOf('|');
+        const getEmail = inputString.substring(0, commaIndex);
+        const getUsername = inputString.substring(commaIndex + 1, commaIndexT);
+        const getProPic = inputString.substring(commaIndexT + 1);
+        proPicCeck(getProPic);
+        document.getElementById("profile-title").innerHTML = getUsername + '<br><span>' + getEmail + '</span>';
         break;
       }
       else {
@@ -193,15 +206,50 @@ function start() {
       }
       count+=1;
       if (count == localStorage.length) {
-        window.location.href = "https://technictm.github.io/musicmusicform";
+        window.location.href = "signUpAndIn.html";
       }
     }
   }
 }
 
+function profileToggle() {
+  document.querySelector('.profile-menu').classList.toggle('active');
+}
+
+function proPicCeck(proPicInd) {
+  const inputString = localStorage.getItem('~username');
+  const commaIndex = inputString.indexOf('~');
+  const commaIndexT = inputString.indexOf('|');
+  const getEmail = inputString.substring(0, commaIndex);
+  const getUsername = inputString.substring(commaIndex + 1, commaIndexT);
+  const inputString1 = localStorage.getItem(getEmail);
+  const commaIndex1 = inputString1.indexOf('~');
+  const getPassword = inputString1.substring(0, commaIndex1);
+  localStorage.setItem(getEmail, getPassword + "~" + getUsername + "|" + String(proPicInd));
+  localStorage.setItem("~username", getEmail + "~" + getUsername + "|" + String(proPicInd));
+  proPic.src = "img/avatar" + String(proPicInd) + ".png";
+}
+
+function clsProPic() {
+  if (showP == 1) {
+    proPicCont.classList.remove('show');
+    setTimeout(function () {
+      proPicCont.style.display = "none";
+    }, 150);
+    showP = 0;
+  }
+  else {
+    proPicCont.style.display = "block";
+    setTimeout(function () {
+      proPicCont.classList.add('show');
+    }, 1);
+    showP = 1;
+  }
+}
+
 function logout() {
   localStorage.setItem("~username", "~none");
-  window.location.href = "https://technictm.github.io/musicmusicform";
+  window.location.href = "signUpAndIn.html";
 }
 
 // close modal when click on the background \\
@@ -223,7 +271,9 @@ let All_song = [
      img: "img/LocoContigo.jpeg",
      bgimg: "img/LocoContigoBg.jpeg",
      singer: "DJ Snake, J Balvin, Tyga",
-     songtime: "3:09"
+     songtime: "3:09",
+     karaoke: "songs/LocoContigoK.mp3",
+     lyrics: "https://www.azlyrics.com/lyrics/djsnake/lococontigo.html"
    },
    {
      name: "China",
@@ -231,7 +281,9 @@ let All_song = [
      img: "img/china.jpeg",
      bgimg: "img/chinabg.webp",
      singer: "Anuel AA, Daddy Yankee, Karol G, Ozuna, J Balvin",
-     songtime: "5:02"
+     songtime: "5:02",
+     karaoke: "songs/ChinaK.mp3",
+     lyrics: "https://www.azlyrics.com/lyrics/anuelaa/china.html"
    },
    {
      name: "Pepas",
@@ -239,7 +291,9 @@ let All_song = [
      img: "img/pepas.jpeg",
      bgimg: "img/pepasbg.jpeg",
      singer: "Farruko",
-     songtime: "4:47"
+     songtime: "4:47",
+     karaoke: "songs/PepasK.mp3",
+     lyrics: "https://www.azlyrics.com/lyrics/farruko/pepas.html"
    },
    {
      name: "No Lo Trates",
@@ -247,7 +301,9 @@ let All_song = [
      img: "img/NoLoTrates.jpeg",
      bgimg: "img/NoLoTratesBg.jpeg",
      singer: "Pitbull, Daddy Yankee, Natti Natasha",
-     songtime: "3:29"
+     songtime: "3:29",
+     karaoke: "songs/NoLoTratesK.mp3",
+     lyrics: "https://www.azlyrics.com/lyrics/pitbull/nolotrates.html"
    },
    {
      name: "No Se Da Cuenta",
@@ -255,7 +311,9 @@ let All_song = [
      img: "img/NoSeDaCuenta.jpeg",
      bgimg: "img/NoSeDaCuentaBg.jpeg",
      singer: "Ozuna, Daddy Yankee",
-     songtime: "4:02"
+     songtime: "4:02",
+     karaoke: "songs/NoSeDaCuentaK.mp3",
+     lyrics: "https://www.azlyrics.com/lyrics/ozuna/nosedacuenta.html"
    },
    {
      name: "Una Locura",
@@ -263,7 +321,9 @@ let All_song = [
      img: "img/UnaLocura.jpeg",
      bgimg: "img/UnaLocuraBg.jpeg",
      singer: "Ozuna, J Balvin, Chencho Corleone",
-     songtime: "3:52"
+     songtime: "3:52",
+     karaoke: "songs/UnaLocuraK.mp3",
+     lyrics: "https://www.azlyrics.com/lyrics/ozuna/unalocura.html"
    }],
 
    // R&B
@@ -273,7 +333,9 @@ let All_song = [
     img: "img/Dynamite.jpeg",
     bgimg: "img/DynamiteBg.jpeg",
     singer: "Taio Cruz",
-    songtime: "4:16"
+    songtime: "4:16",
+    karaoke: "songs/DynamiteK.mp3",
+    lyrics: "https://www.azlyrics.com/lyrics/taiocruz/dynamite.html"
    },
    {
      name: "Soweto",
@@ -281,7 +343,9 @@ let All_song = [
      img: "img/Soweto.jpeg",
      bgimg: "img/Sowetobg.webp",
      singer: "Victony, Tempoe",
-     songtime: "?:??"
+     songtime: "?:??",
+     karaoke: "songs/SowetoK.mp3",
+     lyrics: "https://www.azlyrics.com/lyrics/victony/soweto.html"
    },
    {
      name: "Mood",
@@ -289,8 +353,10 @@ let All_song = [
      img: "img/Mood.jpeg",
      bgimg: "img/Moodbg.jpeg",
      singer: "24kGoldn",
-     songtime: "?:??"
-   },
+     songtime: "?:??",
+     karaoke: "songs/MoodK.mp3",
+     lyrics: "https://www.azlyrics.com/lyrics/24kgoldn/mood.html"
+   }/*,
    {
     name: "???",
     path: "songs/.mp3",
@@ -306,15 +372,7 @@ let All_song = [
     bgimg: "img/Bg.jpeg",
     singer: "???",
     songtime: "?:??"
-  },
-  {
-    name: "???",
-    path: "songs/.mp3",
-    img: "img/.jpeg",
-    bgimg: "img/Bg.jpeg",
-    singer: "???",
-    songtime: "?:??"
-  }],
+  }*/],
 
    // Electronic/Dance
    [{
@@ -340,7 +398,7 @@ let All_song = [
     bgimg: "img/Perubg.jpeg",
     singer: "Fireboy DML, Ed Sheeran",
     songtime: "?:??"
-  },
+  }/*,
   {
     name: "???",
     path: "songs/.mp3",
@@ -356,15 +414,7 @@ let All_song = [
     bgimg: "img/Bg.jpeg",
     singer: "???",
     songtime: "?:??"
-  },
-  {
-    name: "???",
-    path: "songs/.mp3",
-    img: "img/.jpeg",
-    bgimg: "img/Bg.jpeg",
-    singer: "???",
-    songtime: "?:??"
-  }],
+  }*/],
 
   // Pop
   [{
@@ -398,6 +448,14 @@ let All_song = [
     bgimg: "img/Bg.jpeg",
     singer: "???",
     songtime: "?:??"
+  }/*,
+  {
+    name: "???",
+    path: "songs/.mp3",
+    img: "img/.jpeg",
+    bgimg: "img/Bg.jpeg",
+    singer: "???",
+    songtime: "?:??"
   },
   {
     name: "???",
@@ -406,7 +464,7 @@ let All_song = [
     bgimg: "img/Bg.jpeg",
     singer: "???",
     songtime: "?:??"
-  }],
+  }*/],
 
   // Afrobeats
   [{
@@ -440,15 +498,31 @@ let All_song = [
     bgimg: "img/AmIWrongBg.jpeg",
     singer: "Nico, Vinz",
     songtime: "?:??"
-  }],
-  
-  // Hip-Hop/Rap
-  [{
+  }/*,
+  {
     name: "???",
     path: "songs/.mp3",
     img: "img/.jpeg",
     bgimg: "img/Bg.jpeg",
     singer: "???",
+    songtime: "?:??"
+  },
+  {
+    name: "???",
+    path: "songs/.mp3",
+    img: "img/.jpeg",
+    bgimg: "img/Bg.jpeg",
+    singer: "???",
+    songtime: "?:??"
+  }*/],
+  
+  // Hip-Hop/Rap
+  [{
+    name: "Up Down",
+    path: "songs/UpDown.mp3",
+    img: "img/UpDown.jpeg",
+    bgimg: "img/UpDownBg.jpeg",
+    singer: "T-Pain",
     songtime: "?:??"
   },
   {
@@ -466,7 +540,7 @@ let All_song = [
     bgimg: "img/Bg.jpeg",
     singer: "???",
     songtime: "?:??"
-  },
+  }/*,
   {
     name: "???",
     path: "songs/.mp3",
@@ -482,7 +556,7 @@ let All_song = [
     bgimg: "img/Bg.jpeg",
     singer: "???",
     songtime: "?:??"
-  }]
+  }*/]
 ];
 
 
@@ -530,6 +604,20 @@ window.addEventListener("keydown" , (event) => {
   if (event.key === 'a'){
     event.preventDefault();
     autoplay_switch();
+  }
+});
+
+window.addEventListener("keydown" , (event) => {
+  if (event.key === 'd'){
+    event.preventDefault();
+    karaoke_toggle();
+  }
+});
+
+window.addEventListener("keydown" , (event) => {
+  if (event.key === 's'){
+    event.preventDefault();
+    lyrics_toggle();
   }
 });
 
@@ -590,6 +678,20 @@ window.addEventListener("keydown" , (event) => {
   if (event.key === 'p'){
     event.preventDefault();
     previous_song();
+  }
+});
+
+window.addEventListener("keydown" , (event) => {
+  if (event.key === '0'){
+    event.preventDefault();
+    reset_slider();
+    track.currentTime = 0;
+    let time = Math.floor(track.currentTime);
+    let minutes = Math.floor(time/60);
+    let secends = time%60;
+    secends = secends < 10 ? '0' + secends : secends;
+    m.innerHTML = minutes;
+    s.innerHTML = secends;
   }
 });
 
@@ -696,14 +798,51 @@ function load_track(index_no){
 	timer = setInterval(range_slider ,1000);
 	total.innerHTML = All_song[pl].length;
 	present.innerHTML = index_no + 1;
-  document.title = All_song[pl][index_no].name + " / " + All_song[pl][index_no].singer;
+  document.title = All_song[pl][index_no].name + " - " + All_song[pl][index_no].singer;
 }
 
 load_track(index_no);
 
+function karaoke_toggle() {
+  // turn off
+  if (toggleKaraoke == 1){
+    toggleKaraoke = 0;
+	  reset_slider();
+    track.src = All_song[pl][index_no].path;
+    track.load();
+    pausesong();
+    document.getElementById('karaokeOnOff').innerHTML = '<i class="fa-solid fa-microphone"></i>';
+    let time = Math.floor(track.currentTime);
+    let minutes = Math.floor(time/60);
+    let secends = time%60;
+    secends = secends < 10 ? '0' + secends : secends;
+    m.innerHTML = minutes;
+    s.innerHTML = secends;
+  }
+  // turn on
+  else{
+    toggleKaraoke = 1;
+    reset_slider();
+    track.src = All_song[pl][index_no].karaoke;
+    track.load();
+    pausesong();
+    document.getElementById('karaokeOnOff').innerHTML = '<i class="fa-solid fa-microphone-slash"></i>';
+    let time = Math.floor(track.currentTime);
+    let minutes = Math.floor(time/60);
+    let secends = time%60;
+    secends = secends < 10 ? '0' + secends : secends;
+    m.innerHTML = minutes;
+    s.innerHTML = secends;
+  }
+}
+
+function lyrics_toggle() {
+  window.open(All_song[pl][index_no].lyrics, "_blank");
+}
+
 // toggle mute function
 function toggle_mute(){
-	if (toggleMute==1){
+  if (toggleMute==1){
       toggleMute = 0;
       mute_sound();
 	}else{
@@ -721,15 +860,6 @@ function mute_sound(){
   volume_icon.classList.remove("fa-volume-up");
   volume_icon.classList.remove("fa-volume-off");
   volume_icon.classList.add("fa-volume-xmark");
-
-  if(track.volume*100 > 50){
-    /*volume_slider.style.background = "#FF8A65";*/
-    styleVol.innerHTML = '.left input[type="range"]::-webkit-slider-thumb { background: var(--defaultcolor); }';
-  }
-  else{
-    /*volume_slider.style.background = "transparent";*/
-    styleVol.innerHTML = '.left input[type="range"]::-webkit-slider-thumb { background: transparent; }';
-  }
 }
 
 //on sound function
@@ -756,15 +886,6 @@ function on_sound(){
     volume_icon.classList.remove("fa-volume-down");
     volume_icon.classList.add("fa-volume-off");
     volume_icon.classList.remove("fa-volume-up");
-  }
-
-  if(track.volume*100 > 50){
-    /*volume_slider.style.background = "#FF8A65";*/
-    styleVol.innerHTML = '.left input[type="range"]::-webkit-slider-thumb { background: var(--defaultcolor); }';
-  }
-  else{
-    /*volume_slider.style.background = "transparent";*/
-    styleVol.innerHTML = '.left input[type="range"]::-webkit-slider-thumb { background: transparent; }';
   }
 }
 
@@ -805,12 +926,23 @@ function next_song(){
 	if(index_no < All_song[pl].length - 1){
 		index_no += 1;
 		load_track(index_no);
-		//playsong();
-	}else{
+	}
+  else{
 		index_no = 0;
 		load_track(index_no);
-		//playsong();
 	}
+  toggleKaraoke = 0;
+	reset_slider();
+  track.src = All_song[pl][index_no].path;
+  track.load();
+  document.getElementById('karaokeOnOff').innerHTML = '<i class="fa-solid fa-microphone"></i>';
+  let time = Math.floor(track.currentTime);
+  let minutes = Math.floor(time/60);
+  let secends = time%60;
+  secends = secends < 10 ? '0' + secends : secends;
+  m.innerHTML = minutes;
+  s.innerHTML = secends;
+  playsong();
 }
 
 
@@ -819,13 +951,23 @@ function previous_song(){
 	if(index_no > 0){
 		index_no -= 1;
 		load_track(index_no);
-		//playsong();
-
-	}else{
+	}
+  else{
 		index_no = All_song[pl].length - 1;
 		load_track(index_no);
-		//playsong();
 	}
+  toggleKaraoke = 0;
+	reset_slider();
+  track.src = All_song[pl][index_no].path;
+  track.load();
+  document.getElementById('karaokeOnOff').innerHTML = '<i class="fa-solid fa-microphone"></i>';
+  let time = Math.floor(track.currentTime);
+  let minutes = Math.floor(time/60);
+  let secends = time%60;
+  secends = secends < 10 ? '0' + secends : secends;
+  m.innerHTML = minutes;
+  s.innerHTML = secends;
+  playsong();
 }
 
 function nextTitleShow(x) {
@@ -836,7 +978,7 @@ function nextTitleShow(x) {
   else {
     i = 0;
   }
-  x.title = All_song[pl][i].name + " / " + All_song[pl][i].singer;
+  x.title = All_song[pl][i].name + " - " + All_song[pl][i].singer;
 }
 
 function previousTitleShow(x) {
@@ -847,7 +989,7 @@ function previousTitleShow(x) {
   else{
 		i = All_song[pl].length - 1;
 	}
-  x.title = All_song[pl][i].name + " / " + All_song[pl][i].singer;
+  x.title = All_song[pl][i].name + " - " + All_song[pl][i].singer;
 }
 
 function playPauseTitle(x) {
@@ -886,15 +1028,6 @@ function volume_change(){
     volume_icon.classList.add("fa-volume-off");
     volume_icon.classList.remove("fa-volume-up");
   }
-
-  if(track.volume*100 > 50){
-    /*volume_slider.style.background = "#FF8A65";*/
-    styleVol.innerHTML = '.left input[type="range"]::-webkit-slider-thumb { background: var(--defaultcolor); }';
-  }
-  else{
-    /*volume_slider.style.background = "transparent";*/
-    styleVol.innerHTML = '.left input[type="range"]::-webkit-slider-thumb { background: transparent; }';
-  }
 }
 
 // change slider position 
@@ -907,15 +1040,6 @@ function change_duration(){
     secends = secends < 10 ? '0' + secends : secends;
     m.innerHTML = minutes;
     s.innerHTML = secends;
-
-    if(slider.value > 50){
-      /*diraction_slider.style.background = "#FF8A65";*/
-      styleDir.innerHTML = '.right input[type="range"]::-webkit-slider-thumb { background: var(--defaultcolor); }';
-    }
-    else{
-      /*diraction_slider.style.background = "transparent";*/
-      styleDir.innerHTML = '.right input[type="range"]::-webkit-slider-thumb { background: transparent; }';
-    }
 }
 
 
@@ -938,14 +1062,6 @@ function range_slider(){
 		if(!isNaN(track.duration)){
 		   position = track.currentTime * (100 / track.duration);
 		   slider.value =  position;
-       if(slider.value > 50){
-        /*diraction_slider.style.background = "#FF8A65";*/
-        styleDir.innerHTML = '.right input[type="range"]::-webkit-slider-thumb { background: var(--defaultcolor); }';
-      }
-      else{
-        /*diraction_slider.style.background = "transparent";*/
-        styleDir.innerHTML = '.right input[type="range"]::-webkit-slider-thumb { background: transparent; }';
-      }
 	  }
 
         if(!isNaN(track.duration)){
